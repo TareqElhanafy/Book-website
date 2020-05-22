@@ -17,7 +17,7 @@ class CreateDiscussionsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('content',5000);
-            $table->integer('fbook_id');
+            $table->integer('fbook_id')->nullable();
             $table->timestamps();
         });
     }

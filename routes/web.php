@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,8 @@ Route::get('cart/show','CartController@showcart')->name('showcart');
 Route::resource('fbook/{fbook}/discussions','DiscussionController');
 Route::resource('discussion/{discussion}/replies','ReplyController');
 
-
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
 Auth::routes();
 
 //Dashboard Routes

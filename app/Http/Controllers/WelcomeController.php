@@ -20,13 +20,20 @@ class WelcomeController extends Controller
       return view('welcome')->with('categories',Category::all())
       ->with('fbooks',$fbooks);
     }
+
+
     public function show(Fbook $fbook){
+
       return view('showbook')->with('fbook',$fbook);
     }
+
+
     public function showpaidbooks(){
       return view('paid')->with('categories',Category::all())
       ->with('pbooks',Pbook::paginate(4));
     }
+
+
     public function pbookshow(Pbook $pbook){
 
 if (Auth::check()) {

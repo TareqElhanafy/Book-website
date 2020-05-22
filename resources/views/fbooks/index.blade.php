@@ -45,13 +45,14 @@
                             </td>
                             <td>{{$fbook->comments->count()}}</td>
 
-
+                            
                             <td>
+                                        @if(isset($fbook->discussion))
                               <a href="{{route('discussions.show',[$fbook->id,$fbook->discussion->id])}}">
                               {{$fbook->discussion->title}}
                                  </a>
                                  </td>
-
+                            @endif
 
                             @if($fbook->available==='0')
                             <form class="" action="{{route('makeavailable',$fbook->id)}}" method="post">

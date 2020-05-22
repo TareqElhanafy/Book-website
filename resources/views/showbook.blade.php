@@ -41,9 +41,9 @@
 
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              @if($fbook->discussion->count()>0)
+              @if(isset($fbook->discussion))
    <p> <a class="btn btn-success" href="{{route('discussions.show',[$fbook->id,$fbook->discussion->id])}}">See the book's discussion</a></p>
-    @endif
+              @endif
               <p class="lead">{{$fbook->description}}</p>
 
             </div>
