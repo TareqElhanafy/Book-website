@@ -25,16 +25,16 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="/"><b>Hexa</b>Book</a>
+        <a href="/">HexaBook <b>Dashboard</b></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in</p>
-        <form action="{{ route('login') }}" method="post">
+        <form action="{{ route('doAdminlogin') }}" method="post">
           @csrf
 
           <div class="form-group has-feedback">
 
-        <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+        <input type="email"  class="form-control" name="email"  required autocomplete="email" autofocus placeholder="Email">
         @error('email')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
             <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
-                  <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                  <input type="checkbox" name="remember" id="remember" value="1"> Remember Me
                 </label>
               </div>
             </div><!-- /.col -->
@@ -68,8 +68,7 @@
         </form>
 
 
-        <a href="{{route('password.request')}}">I forgot my password</a><br>
-        <a href="{{route('register')}}" class="text-center">Register a new membership</a>
+        <a href="{{route('adminforgetpage')}}">I forgot my password</a><br>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

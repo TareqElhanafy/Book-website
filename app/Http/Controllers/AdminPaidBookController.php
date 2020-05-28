@@ -8,7 +8,7 @@ use App\Category;
 use App\Http\Requests\CreatePbookRequest;
 use App\Http\Requests\UpdatePbookRequest;
 
-class PbookController extends Controller
+class AdminPaidBookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,7 @@ class PbookController extends Controller
      */
     public function index()
     {
-      $pbooks=auth()->user()->pbooks()->paginate(4);
-
-        return view('pbooks.index')->with('pbooks',$pbooks);
+        return view('adminpbooks.index')->with('pbooks',Pbook::paginate(6));
     }
 
     /**
@@ -29,7 +27,7 @@ class PbookController extends Controller
      */
     public function create()
     {
-        return view('pbooks.create')->with('categories',Category::all());
+        return view('adminpbooks.create')->with('categories',Category::all());
     }
 
     /**
@@ -47,9 +45,10 @@ class PbookController extends Controller
          'writer_name'=>$request->writer_name,
          'category_id'=>$request->category_id,
          'price'=>$request->price,
+         'available'=>'1',
          'description'=>strip_tags($request->description),
          'image'=>$image,
-         'user_id'=>auth()->user()->id
+         'user_id'=>auth()->guard('admin')->user()->id
      ]);
      if ($request->has('en')) {
        session()->flash('succes','You added a new book successfully' );
@@ -57,7 +56,7 @@ class PbookController extends Controller
     session()->flash('succes','لقد قمت بإضافة كتاب جديد بنجاح');
 
   }
-     return redirect(route('pbooks.index'));
+     return redirect(route('adminpbooks.index'));
     }
 
     /**
@@ -79,7 +78,7 @@ class PbookController extends Controller
      */
     public function edit(Pbook $pbook)
     {
-          return view('pbooks.create')->with('pbook',$pbook)->with('categories',Category::all());
+          return view('adminpbooks.create')->with('pbook',$pbook)->with('categories',Category::all());
     }
 
     /**
@@ -105,6 +104,7 @@ class PbookController extends Controller
          'price'=>$request->price,
          'description'=>strip_tags($request->description),
          'image'=>$image,
+         'available'=>'1',
          'user_id'=>auth()->user()->id
         ]);
 
@@ -115,7 +115,7 @@ class PbookController extends Controller
        session()->flash('success','لقد قمت بتحديث الكتاب بنجاح');
 
      }
-        return redirect(route('pbooks.index'));
+        return redirect(route('adminpbooks.index'));
     }
 
     /**
@@ -135,9 +135,22 @@ class PbookController extends Controller
              session()->flash('succes','لقد قمت بحذف الكتاب بنجاح');
 
            }
-              return redirect(route('pbooks.index'));
+              return redirect(route('adminpbooks.index'));
     }
+    public function makeavailable(Pbook $pbook){
 
+      $pbook->update([
+        'available'=>'1'
+      ]);
+      return redirect(route('adminpbooks.index'));
+    }
+    public function makeunavailable(Pbook $pbook){
+
+      $pbook->update([
+        'available'=>'0'
+      ]);
+      return redirect(route('adminpbooks.index'));
+    }
 
 
 }

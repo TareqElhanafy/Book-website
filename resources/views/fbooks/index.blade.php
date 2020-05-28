@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.profile')
 @section('content')
 
   <div class="row">
@@ -37,6 +37,7 @@
                             </td>
 
                             <td>
+
                               @if($fbook->available==='1')
                               {{__('trans.Available')}}
                               @else
@@ -53,35 +54,7 @@
                                  </a>
                                  </td>
                             @endif
-
-                            @if($fbook->available==='0')
-                            <form class="" action="{{route('makeavailable',$fbook->id)}}" method="post">
-@csrf
-@method('PUT')
-  <td>
-<button type="submit" class="btn btn-warning">{{__('trans.makeavailable')}}</button>
-
-</td>
-</form>
-@else
-<form class="" action="{{route('makeunavailable',$fbook->id)}}" method="post">
-@csrf
-@method('PUT')
-<td>
-<button type="submit" class="btn btn-warning">{{__('trans.makeunavailable')}}</button>
-</td>
-</form>
-@endif
-<form class="" action="{{route('fbooks.destroy',$fbook->id)}}" method="post">
-  @csrf
-  @method('DELETE')
-  <td>
-    <input type="hidden" name="en" value="">
-    <button type="submit" class="btn btn-danger">{{__('trans.delete')}}</button>
-  </td>
-
-</form>
-<td>
+                            <td>
   <a href="{{route('fbooks.edit',$fbook->id)}}" class="btn btn-primary">{{__('trans.Edit')}}</a>
 </td>
                           </tr>

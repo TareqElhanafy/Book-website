@@ -46,7 +46,8 @@ return[
     'cart'=>'Cart',
 'logout'=>'Log out',
 'commnumber'=>'Comments Number',
-'discussion'=>'The discussion of the book'
+'discussion'=>'The discussion of the book',
+'dashboard'=>'Dashboard',
 ];
 
  ?>

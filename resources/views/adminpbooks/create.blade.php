@@ -1,6 +1,6 @@
-@extends('layouts.profile')
+@extends('layouts.admin')
 @section('content')
-<form role="form" action="{{isset($pbook)?route('pbooks.update',$pbook->id):route('pbooks.store')}}" method="post" enctype="multipart/form-data">
+<form role="form" action="{{isset($pbook)?route('adminpbooks.update',$pbook->id):route('adminpbooks.store')}}" method="post" enctype="multipart/form-data">
   @csrf
 @if(isset($pbook))
 @method('PUT')

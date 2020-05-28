@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title> HexaBook | Log in</title>
+    <title> HexaBook | rest</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -23,53 +22,57 @@
     <![endif]-->
   </head>
   <body class="login-page">
+  @if(session()->has('success'))
+<div class="callout callout-info">
+
+            <p>{{session()->get('success')}}</p>
+          </div>
+          @endif
     <div class="login-box">
       <div class="login-logo">
-        <a href="/"><b>Hexa</b>Book</a>
+        <a href="">Rest Password</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Sign in</p>
-        <form action="{{ route('login') }}" method="post">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <form action="{{route('sendPasswordEmail')}}" method="post">
+
           @csrf
+          @if(session()->has('success'))
+          <div class="example-modal">
+            <div class="modal modal-success">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">WEll !!</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>{{session()->get('success')}}</p>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+          </div>
 
+          @endif
           <div class="form-group has-feedback">
-
-        <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
-        @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+            <input type="email" class="form-control" name="email" placeholder="Email">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
-          <div class="form-group has-feedback">
-
-        <input type="password" class="form-control" name="password" id="password" required autocomplete="current-password" placeholder="Password">
-        @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div>
+        
           <div class="row">
             <div class="col-xs-8">
-              <div class="checkbox icheck">
-                <label>
-                  <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                </label>
-              </div>
+          
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Reset</button>
             </div><!-- /.col -->
           </div>
         </form>
 
+       
 
-        <a href="{{route('password.request')}}">I forgot my password</a><br>
-        <a href="{{route('register')}}" class="text-center">Register a new membership</a>
+        <a href="{{route('adminLogin')}}">Sign In</a><br>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
@@ -91,3 +94,4 @@
     </script>
   </body>
 </html>
+

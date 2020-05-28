@@ -46,7 +46,8 @@ return[
 'cart'=>'عربة التسوق',
 'logout'=>'تسجيل خروج',
 'commnumber'=>'عدد التعليقات',
-'discussion'=>'نقاش الكتاب'
+'discussion'=>'نقاش الكتاب',
+'dashboard'=>'الإدارة'
 ];
 
 

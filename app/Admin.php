@@ -2,22 +2,14 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
-// use Cache;
-class User extends Authenticatable
+use Illuminate\Support\Str;
+
+class Admin extends Authenticatable
 {
-  public function fbooks(){
-    return $this->hasMany(Fbook::class);
-  }
-  public function pbooks(){
-    return $this->hasMany(Pbook::class);
-  }
-  public function comments(){
-    return $this->hasMany(Comment::class);
-  }
     use Notifiable;
 
     /**
@@ -26,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role'
+        'name', 'email', 'password','token','tokenexpired'
     ];
 
     /**
@@ -48,11 +40,9 @@ class User extends Authenticatable
     ];
 
     public function isOnline(){
-      return Cache::has('user-is-online-'.$this->id);
+        return Cache::has('user-is-online-'.$this->id);
+      }
+      public static function generateToken(){
+        return Str::random(30);
     }
-    public function isAdmin(){
-      return $this->role==='admin';
-    }
-
-  
 }

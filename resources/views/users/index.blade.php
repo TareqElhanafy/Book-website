@@ -22,7 +22,7 @@
                             <td class="sorting_1">{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->role}}</td>
-                              @auth
+                              
                             <td>
 
                               @if($user->isOnline())
@@ -32,15 +32,14 @@
                               @endif
 
                             </td>
-                            @endauth
-                            @auth
+                           
                              @if($user->role==='regular')
                             <td><a href="{{route('make.admin',$user->id)}}" class="btn btn-success">{{__('trans.makeadmin')}}</a></td>
                                @endif
                                @if($user->role==='admin')
                             <td><a href="{{route('remove.admin',$user->id)}}"class="btn btn-warning">{{__('trans.removeadmin')}}</a></td>
                             @endif
-                            @endauth
+                            
                           </tr>
                           @endforeach
                         </tbody>

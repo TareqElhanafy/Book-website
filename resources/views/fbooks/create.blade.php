@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.profile')
 @section('content')
 <form role="form" action="{{isset($fbook)?route('fbooks.update',$fbook->id):route('fbooks.store')}}" method="post" enctype="multipart/form-data">
   @csrf

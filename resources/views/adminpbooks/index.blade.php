@@ -1,4 +1,4 @@
-@extends('layouts.profile')
+@extends('layouts.admin')
 @section('content')
 
   <div class="row">
@@ -39,9 +39,39 @@
                               {{__('trans.unAvailable')}}
                                 @endif
                             </td>
-                            <td>
-  <a href="{{route('pbooks.edit',$pbook->id)}}" class="btn btn-primary">{{__('trans.Edit')}}</a>
+                          
+
+                            @if($pbook->available==='0')
+                            <form class="" action="{{route('makepavailable',$pbook->id)}}" method="post">
+@csrf
+@method('PUT')
+  <td>
+<button type="submit" class="btn btn-warning">{{__('trans.makeavailable')}}</button>
+
 </td>
+</form>
+@else
+<form class="" action="{{route('makepunavailable',$pbook->id)}}" method="post">
+@csrf
+@method('PUT')
+<td>
+<button type="submit" class="btn btn-warning">{{__('trans.makeunavailable')}}</button>
+</td>
+</form>
+@endif
+<form class="" action="{{route('adminpbooks.destroy',$pbook->id)}}" method="post">
+  @csrf
+  @method('DELETE')
+  <td>
+    <input type="hidden" name="en" value="">
+    <button type="submit" class="btn btn-danger">{{__('trans.delete')}}</button>
+  </td>
+
+</form>
+<td>
+  <a href="{{route('adminpbooks.edit',$pbook->id)}}" class="btn btn-primary">{{__('trans.Edit')}}</a>
+</td>
+
                           </tr>
                           @endforeach
                         </tbody>

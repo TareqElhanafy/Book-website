@@ -59,8 +59,14 @@
                   </li>
                     </ul>
         </section>
+        @if(Auth::guard('admin')->check())
+        <a class="btn btn-xs btn-round btn-primary mr-2" href="{{route('dashbord')}}">{{__('trans.dashboard')}}</a>
+        <a class="btn btn-xs btn-round btn-danger mr-2" href="{{route('adminlogout')}}">Logout</a>
+
+        @else
         @auth
-        <a class="btn btn-xs btn-round btn-primary mr-2" href="{{ route('home') }}">{{__('trans.profile')}}</a>
+        <a class="btn btn-xs btn-round btn-primary mr-2" href="{{route('profile',auth()->user()->id)}}">{{__('trans.profile')}}</a>
+
         <a class="btn btn-xs btn-round btn-success mr-2" href="{{ route('showcart') }}">{{__('trans.cart')}}</a>
         <form  action="{{ route('logout') }}" method="POST" >
             @csrf
@@ -75,6 +81,7 @@
 @endif
 @endif
 @endauth
+@endif
 
 
       </div>

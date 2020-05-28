@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.profile')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

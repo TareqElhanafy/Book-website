@@ -37,24 +37,13 @@ Auth::routes();
 
 //Dashboard Routes
 
-Route::middleware(['userOnline','auth'])->group(function(){
-  Route::get('/home', 'HomeController@index')->name('home');
-  //user routes
-  Route::resource('users','UserController');
-  Route::get('admin/{user}','UserController@makeAdmin')->name('make.admin');
-  Route::get('remove/admin/{user}','UserController@removeAdmin')->name('remove.admin');
-  //Categories routes
-  Route::resource('categories','CategoryController');
-  Route::put('category/available/{category}','CategoryController@makecatavailable')->name('makecatavailable');
-  Route::put('category/unavailable/{category}','CategoryController@makecatunavailable')->name('makecatunavailable');
-    //free books routes
-  Route::resource('fbooks','FbookController');
-  Route::put('fbooks/available/{fbook}','FbookController@makeavailable')->name('makeavailable');
-  Route::put('fbooks/unavailable/{fbook}','FbookController@makeunavailable')->name('makeunavailable');
-  //paid books routes
-  Route::resource('pbooks','PbookController');
-  Route::put('pbooks/available/{pbook}','PbookController@makeavailable')->name('makepavailable');
-  Route::put('pbooks/unavailable/{pbook}','PbookController@makeunavailable')->name('makepunavailable');
+Route::middleware(['adminonline','auth','userOnline'])->group(function(){
+ 
+  //free books routes
+Route::resource('fbooks','FbookController');
 
+//paid books routes
+Route::resource('pbooks','PbookController');
 
+Route::get('profile/{user}','UserController@profile')->name('profile');
 });

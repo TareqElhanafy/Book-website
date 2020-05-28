@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title> HexaBook | Log in</title>
+    <title> HexaBook | Reset</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -25,51 +24,39 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="/"><b>Hexa</b>Book</a>
+        <a href="">Reset New Password</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Sign in</p>
-        <form action="{{ route('login') }}" method="post">
+        <p class="login-box-msg">Enter new Password</p>
+        <form action="{{route('doAdminPasswordreset',$admin->id)}}" method="post">
           @csrf
-
+          @method('PUT');
           <div class="form-group has-feedback">
-
-        <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
-        @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+            <input type="email" class="form-control" name="email" value="{{$admin->email}}">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-
-        <input type="password" class="form-control" name="password" id="password" required autocomplete="current-password" placeholder="Password">
-        @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+            <input type="password" class="form-control" name="password" placeholder="Password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" name="password_confirmation" placeholder="Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+        
           <div class="row">
             <div class="col-xs-8">
-              <div class="checkbox icheck">
-                <label>
-                  <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                </label>
-              </div>
+          
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Reset</button>
             </div><!-- /.col -->
           </div>
         </form>
 
+       
 
-        <a href="{{route('password.request')}}">I forgot my password</a><br>
-        <a href="{{route('register')}}" class="text-center">Register a new membership</a>
+        <a href="{{route('adminLogin')}}">Sign In</a><br>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
@@ -91,3 +78,4 @@
     </script>
   </body>
 </html>
+

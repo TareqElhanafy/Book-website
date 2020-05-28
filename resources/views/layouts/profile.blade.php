@@ -6,7 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html  lang="{{ app()->getLocale() }}">
   <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <title>Profile</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -81,10 +81,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Menu toggle button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">3</span>
+                  <span class="label label-warning">{{auth()->user()->unreadNotifications()->count()}}</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">You have 3 notifications</li>
+                  <li class="header">You have {{auth()->user()->unreadNotifications()->count()}} notifications</li>
                   <li>
                     <!-- Inner Menu: contains the notifications -->
                     <ul class="menu">
@@ -106,25 +106,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- The user image in the navbar-->
                   <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-            
+                  @auth
                   <span class="hidden-xs">
 
-                    {{auth()->guard('admin')->user()->name}}
+                    {{auth()->user()->name}}
 
                   </span>
-                  
+                  @endauth
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
                     <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-                   
-
+                    @auth
                     <p>
-                      {{auth()->guard('admin')->user()->name}}
-                      <small>  {{auth()->guard('admin')->user()->created_at}}</small>
+                      {{auth()->user()->name}}
+                      <small>  {{auth()->user()->created_at}}</small>
                     </p>
-                   
+                    @endauth
                   </li>
                   <!-- Menu Body -->
                   <li class="user-body">
@@ -153,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               {{ __('Logout') }}
                           </a>
 
-                          <form id="logout-form" action="{{ route('adminlogout') }}" method="POST" style="display: none;">
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                               @csrf
                           </form>
                       </div>
@@ -163,7 +162,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
 
             </ul>
-
           </div>
         </nav>
       </header>
@@ -180,12 +178,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
             </div>
-         
-
+            @auth
             <div class="pull-left info">
-              <p>{{auth()->guard('admin')->user()->name}}</p>
+              <p>{{auth()->user()->name}}</p>
               <!-- Status -->
-              @if(auth()->guard('admin')->user()->isOnline())
+              @if(auth()->user()->isOnline())
 
               <a href=""><i class="fa fa-circle text-success"></i>
                  {{__('trans.status1')}}
@@ -198,7 +195,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 @endif
             </div>
-          
+            @endauth
           </div>
 
           <!-- search form (Optional) -->
@@ -217,23 +214,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Optionally, you can add icons to the links -->
 
-            <li class="{{(request()->is('users'))?'active':''}}"><a href="{{route('users.index')}}"><i class="fa fa-link"></i> <span>{{__('trans.users')}}</span></a></li>
-            <li class="{{(request()->is('categories'))?'active':''}}"><a href="{{route('categories.index')}}"><i class="fa fa-link"></i> <span>{{__('trans.category')}}</span></a></li>
             <li class="treeview">
               <a href="#"><i class="fa fa-link"></i> <span>{{__('trans.FreeBooks')}}</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <li><a href="{{ route('adminfbooks.create') }}" ><i class="fa fa-language"></i> {{__('trans.addbook')}}</a></li>
+                <li><a href="{{ route('fbooks.create') }}" ><i class="fa fa-language"></i> {{__('trans.addbook')}}</a></li>
 
-      <li><a href="{{ route('adminfbooks.index') }}" ><i class="fa fa-language"></i> {{__('trans.showbooks')}}</a></li>
+      <li><a href="{{ route('fbooks.index') }}" ><i class="fa fa-language"></i> {{__('trans.showbooks')}}</a></li>
               </ul>
             </li>
 
             <li class="treeview">
               <a href="#"><i class="fa fa-link"></i> <span>{{__('trans.paidBooks')}}</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <li><a href="{{ route('adminpbooks.create') }}" ><i class="fa fa-language"></i> {{__('trans.addbook')}}</a></li>
+                <li><a href="{{ route('pbooks.create')}}" ><i class="fa fa-language"></i> {{__('trans.addbook')}}</a></li>
 
-        <li><a href="{{ route('adminpbooks.index') }}" ><i class="fa fa-language"></i> {{__('trans.showbooks')}}</a></li>
+        <li><a href="{{ route('pbooks.index')}}" ><i class="fa fa-language"></i> {{__('trans.showbooks')}}</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -242,9 +237,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li><a href="{{ url('locale/en') }}" ><i class="fa fa-language"></i> English</a></li>
 
   <li><a href="{{ url('locale/ar') }}" ><i class="fa fa-language"></i> Arabic</a></li>
+
               </ul>
             </li>
-          
+           
           </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->

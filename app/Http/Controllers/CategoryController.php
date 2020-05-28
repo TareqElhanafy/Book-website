@@ -8,9 +8,7 @@ use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 class CategoryController extends Controller
 {
-  public function __construct(){
-  $this->middleware(['admin'])->only(['index']);
-}
+
     /**
      * Display a listing of the resource.
      *

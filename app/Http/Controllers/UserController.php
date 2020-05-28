@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 class UserController extends Controller
 {
-  public function __construct(){
-  $this->middleware(['admin'])->only(['index']);
-}
+
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +15,10 @@ class UserController extends Controller
     public function index()
     {
       return view('users.index')->with('users',User::paginate(3));
+    }
+
+    public function profile(User $user){
+return view('profile');
     }
 
     /**

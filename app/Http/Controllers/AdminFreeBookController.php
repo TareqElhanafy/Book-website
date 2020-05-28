@@ -9,7 +9,7 @@ use App\Http\Requests\CreateFbookRequest;
 use App\Http\Requests\UpdateFbookRequest;
 
 use Illuminate\Support\Facades\Session;
-class FbookController extends Controller
+class AdminFreeBookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class FbookController extends Controller
      */
     public function index()
     {
-$fbooks=auth()->user()->fbooks()->paginate(4);
-        return view('fbooks.index')->with('fbooks',$fbooks);
+
+        return view('adminfbooks.index')->with('fbooks',Fbook::paginate(6));
     }
     
 
@@ -30,7 +30,7 @@ $fbooks=auth()->user()->fbooks()->paginate(4);
      */
     public function create()
     {
-        return view('fbooks.create')->with('categories',Category::all());
+        return view('adminfbooks.create')->with('categories',Category::all());
     }
 
     /**
@@ -49,7 +49,8 @@ $fbooks=auth()->user()->fbooks()->paginate(4);
        'category_id'=>$request->category_id,
        'description'=>strip_tags($request->description),
        'image'=>$image,
-       'user_id'=>auth()->user()->id
+       'available'=>'1',
+       'user_id'=>auth()->guard('admin')->user()->id
    ]);
    if ($request->has('en')) {
      session()->flash('succes','You added a new book successfully' );
@@ -57,7 +58,7 @@ $fbooks=auth()->user()->fbooks()->paginate(4);
   session()->flash('succes','لقد قمت بإضافة كتاب جديد بنجاح');
 
 }
-   return redirect(route('fbooks.index'));
+   return redirect(route('adminfbooks.index'));
     }
 
     /**
@@ -79,7 +80,7 @@ $fbooks=auth()->user()->fbooks()->paginate(4);
      */
     public function edit(Fbook $fbook)
     {
-        return view('fbooks.create')->with('fbook',$fbook)->with('categories',Category::all());
+        return view('adminfbooks.create')->with('fbook',$fbook)->with('categories',Category::all());
     }
 
     /**
@@ -103,7 +104,8 @@ $fbooks=auth()->user()->fbooks()->paginate(4);
        'category_id'=>$request->category_id,
        'description'=>strip_tags($request->description),
        'image'=>$image,
-       'user_id'=>auth()->user()->id
+       'available'=>'1',
+       'user_id'=>auth()->guard('admin')->user()->id
       ]);
 
       if(Session::has('locale')==='en')
@@ -113,7 +115,7 @@ $fbooks=auth()->user()->fbooks()->paginate(4);
      session()->flash('success','لقد قمت بتحديث الكتاب بنجاح');
 
    }
-      return redirect(route('fbooks.index'));
+      return redirect(route('adminfbooks.index'));
     }
 
     /**
@@ -133,7 +135,20 @@ $fbooks=auth()->user()->fbooks()->paginate(4);
        session()->flash('succes','لقد قمت بحذف الكتاب بنجاح');
 
      }
-        return redirect(route('fbooks.index'));
+        return redirect(route('adminfbooks.index'));
     }
+    public function makeavailable(Fbook $fbook){
 
+      $fbook->update([
+        'available'=>'1'
+      ]);
+      return redirect(route('adminfbooks.index'));
+    }
+    public function makeunavailable(Fbook $fbook){
+
+      $fbook->update([
+        'available'=>'0'
+      ]);
+      return redirect(route('adminfbooks.index'));
+    }
 }
