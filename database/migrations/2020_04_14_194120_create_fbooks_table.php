@@ -21,6 +21,7 @@ class CreateFbooksTable extends Migration
             $table->string('user_id');
             $table->string('description',5000);
             $table->string('image');
+            $table->integer('views')->default(0);
             $table->enum('available',[Fbook::available_book,Fbook::unavailable_book])->default(Fbook::unavailable_book);
             $table->timestamps();
         });

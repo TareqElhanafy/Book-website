@@ -40,8 +40,8 @@ Route::put('category/unavailable/{category}','CategoryController@makecatunavaila
     ]
   ]);
 
-Route::put('fbooks/available/{fbook}','FbookController@makeavailable')->name('makeavailable');
-Route::put('fbooks/unavailable/{fbook}','FbookController@makeunavailable')->name('makeunavailable');
+Route::put('fbooks/available/{fbook}','AdminFreeBookController@makeavailable')->name('makeavailable');
+Route::put('fbooks/unavailable/{fbook}','AdminFreeBookController@makeunavailable')->name('makeunavailable');
 //paid books routes
 Route::resource('pbooks','AdminPaidBookController',[
   'names'=>[
@@ -56,7 +56,7 @@ Route::resource('pbooks','AdminPaidBookController',[
   ]
 ]);
 
-Route::put('pbooks/available/{pbook}','PbookController@makeavailable')->name('makepavailable');
-Route::put('pbooks/unavailable/{pbook}','PbookController@makeunavailable')->name('makepunavailable');
+Route::put('pbooks/available/{pbook}','AdminPaidBookController@makeavailable')->name('makepavailable');
+Route::put('pbooks/unavailable/{pbook}','AdminPaidBookController@makeunavailable')->name('makepunavailable');
 });
 });

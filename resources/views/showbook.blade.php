@@ -81,8 +81,7 @@
 @endforeach
 
               <hr>
-
-@auth
+@if(Auth::check())
               <form action="{{route('comments.store',$fbook->id)}}" method="POST">
                 @csrf
                 @if($errors->any())
@@ -98,7 +97,8 @@
 
                 <button class="btn btn-primary btn-block" type="submit">Submit your comment</button>
               </form>
-@endauth
+@endif
+
             </div>
           </div>
 

@@ -22,6 +22,7 @@ class CreatePbooksTable extends Migration
             $table->integer('price');
             $table->string('description',5000);
             $table->string('image');
+            $table->integer('views')->default(0);
             $table->enum('available',[Pbook::available_book,Pbook::unavailable_book])->default(Pbook::unavailable_book);
             $table->timestamps();
         });

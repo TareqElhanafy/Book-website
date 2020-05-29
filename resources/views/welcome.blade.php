@@ -83,48 +83,23 @@
 
                 <hr>
 
-                <h6 class="sidebar-title">Top posts</h6>
-                <a class="media text-default align-items-center mb-5" href="blog-single.html">
-                  <img class="rounded w-65px mr-4" src="../assets/img/thumb/4.jpg">
-                  <p class="media-body small-2 lh-4 mb-0">Thank to Maryam for joining our team</p>
+                <h6 class="sidebar-title">Top Free Books</h6>
+                @foreach($fbooks as $fbook)
+                
+                <a class="media text-default align-items-center mb-5" href="{{route('bookshow',$fbook->id)}}">
+                  <img class="rounded w-65px mr-4" src="{{asset('storage/'.$fbook->image)}}">
+                  <p class="media-body small-2 lh-4 mb-0">{{$fbook->name}}</p>
                 </a>
-
-                <a class="media text-default align-items-center mb-5" href="blog-single.html">
-                  <img class="rounded w-65px mr-4" src="../assets/img/thumb/3.jpg">
-                  <p class="media-body small-2 lh-4 mb-0">Best practices for minimalist design</p>
-                </a>
-
-                <a class="media text-default align-items-center mb-5" href="blog-single.html">
-                  <img class="rounded w-65px mr-4" src="../assets/img/thumb/5.jpg">
-                  <p class="media-body small-2 lh-4 mb-0">New published books for product designers</p>
-                </a>
-
-                <a class="media text-default align-items-center mb-5" href="blog-single.html">
-                  <img class="rounded w-65px mr-4" src="../assets/img/thumb/2.jpg">
-                  <p class="media-body small-2 lh-4 mb-0">Top 5 brilliant content marketing strategies</p>
-                </a>
+@endforeach
 
                 <hr>
 
-                <h6 class="sidebar-title">Tags</h6>
-                <div class="gap-multiline-items-1">
-                  <a class="badge badge-secondary" href="#">Record</a>
-                  <a class="badge badge-secondary" href="#">Progress</a>
-                  <a class="badge badge-secondary" href="#">Customers</a>
-                  <a class="badge badge-secondary" href="#">Freebie</a>
-                  <a class="badge badge-secondary" href="#">Offer</a>
-                  <a class="badge badge-secondary" href="#">Screenshot</a>
-                  <a class="badge badge-secondary" href="#">Milestone</a>
-                  <a class="badge badge-secondary" href="#">Version</a>
-                  <a class="badge badge-secondary" href="#">Design</a>
-                  <a class="badge badge-secondary" href="#">Customers</a>
-                  <a class="badge badge-secondary" href="#">Job</a>
-                </div>
+                
 
                 <hr>
 
                 <h6 class="sidebar-title">About</h6>
-                <p class="small-3">TheSaaS is a responsive, professional, and multipurpose SaaS, Software, Startup and WebApp landing template powered by Bootstrap 4. TheSaaS is a powerful and super flexible tool for any kind of landing pages.</p>
+                <p class="small-3">free service for everyone, Go ahead and pick a book</p>
 
 
               </div>

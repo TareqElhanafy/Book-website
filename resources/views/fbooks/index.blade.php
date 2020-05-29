@@ -19,14 +19,20 @@
                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">{{__('trans.status')}}</th>
                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">{{__('trans.commnumber')}}</th>
 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">{{__('trans.discussion')}}</th>
-                        </thead>
+<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">{{__('trans.Bookviews')}}</th>
+
+</thead>
                         <tbody>
                       @foreach($fbooks as $fbook)
                         <tr role="row" class="odd">
                             <td class="sorting_1">
+                              @if($fbook->available=='1')
                               <a href="{{route('bookshow',$fbook->id)}}">
                               {{$fbook->name}}
                               </a>
+                              @else 
+                              {{$fbook->name}}
+@endif
                             </td>
                               <td>{{$fbook->writer_name}}</td>
                               <td>{{$fbook->category->name}}</td>
@@ -54,6 +60,8 @@
                                  </a>
                                  </td>
                             @endif
+                            <td>{{$fbook->views}}</td>
+
                             <td>
   <a href="{{route('fbooks.edit',$fbook->id)}}" class="btn btn-primary">{{__('trans.Edit')}}</a>
 </td>

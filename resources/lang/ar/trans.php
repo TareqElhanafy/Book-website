@@ -47,7 +47,9 @@ return[
 'logout'=>'تسجيل خروج',
 'commnumber'=>'عدد التعليقات',
 'discussion'=>'نقاش الكتاب',
-'dashboard'=>'الإدارة'
+'dashboard'=>'الإدارة',
+'Bookonwer'=>'صاحب الكتاب',
+'Bookviews'=>'عدد المشاهدات'
 ];
 
 

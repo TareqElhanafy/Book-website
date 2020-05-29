@@ -18,11 +18,21 @@
                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">{{__('trans.Bookdescription')}}</th>
                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">{{__('trans.bookimage')}}</th>
                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">{{__('trans.status')}}</th>
-                        </thead>
+                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">{{__('trans.Bookviews')}}</th>
+
+                          </thead>
                         <tbody>
                       @foreach($pbooks as $pbook)
                         <tr role="row" class="odd">
-                            <td class="sorting_1">{{$pbook->name}}</td>
+                            <td class="sorting_1">
+                            @if($pbook->available=='1')
+                              <a href="{{route('bookshow',$fbook->id)}}">
+                              {{$pbook->name}}
+                              </a>
+                              @else 
+                              {{$pbook->name}}
+@endif
+                            </td>
                               <td>{{$pbook->writer_name}}</td>
                               <td>{{$pbook->category->name}}</td>
                               <td>{{$pbook->price}}</td>
@@ -39,6 +49,8 @@
                               {{__('trans.unAvailable')}}
                                 @endif
                             </td>
+                            <td>{{$pbook->views}}</td>
+
                             <td>
   <a href="{{route('pbooks.edit',$pbook->id)}}" class="btn btn-primary">{{__('trans.Edit')}}</a>
 </td>

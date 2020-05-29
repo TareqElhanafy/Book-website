@@ -48,6 +48,8 @@ return[
 'commnumber'=>'Comments Number',
 'discussion'=>'The discussion of the book',
 'dashboard'=>'Dashboard',
+'Bookonwer'=>'Book Owner',
+'Bookviews'=>'Book views'
 ];
 
  ?>
